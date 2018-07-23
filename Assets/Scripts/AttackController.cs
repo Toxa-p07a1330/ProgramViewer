@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
+using System.Threading;
 
 public class AttackController : MonoBehaviour {
 
     public bool isFacingRight;
     MovementController MoveCntr;
-
-
+    Color color = new Color(0, 0, 0, 0.5f);
     private float scoperLen = 3;
     public float scoperAng = 0;
     private float scopeRotSpeed = 1f;
@@ -13,12 +13,13 @@ public class AttackController : MonoBehaviour {
     private float scopeMaxLen = 15;
     private float scopeMinLen = 1;
     private float fireForce = 100;
-    private float bowLen = 1;
+    private float armLen = 1;
     private float fireDirection = 1;
     private const float angleRealtion = 0.0174533f;
     public GameObject scoper;
     public Rigidbody2D Arrow;
     public static Rigidbody2D FlyingArr;
+    public static Rigidbody2D Knife;
     public static GameObject scope;
     bool flag = false;
     float speedRot = 2.5f;
@@ -52,7 +53,15 @@ public class AttackController : MonoBehaviour {
         else if (Input.GetKeyDown(KeyCode.Alpha2))
             weaponState = WeaponState.CROSSBOW;
         else if (Input.GetKeyDown(KeyCode.F))
-            attacks = true;
+        {
+            MoveCntr.attacks = true;
+            Knife = Instantiate(Arrow, MoveCntr.transform.position + new Vector3(armLen * Mathf.Cos(scoperAng * angleRealtion) * scopeToRight, armLen * Mathf.Sin(scoperAng * angleRealtion)), Quaternion.identity);
+            Knife.AddForce((scope.transform.position - MoveCntr.rigidbody.transform.position) * fireForce);
+            degree += 25 * speedRot;
+            Knife.MoveRotation(degree);
+            Destroy(Knife.gameObject, 0.1f);
+
+        }
 
         handleThrowInput();
         handleAimingInput();
@@ -92,4 +101,10 @@ public class AttackController : MonoBehaviour {
 
         fireDirection = MoveCntr.rigidbody.transform.localScale.x;
     }
+    public void observeAttackEnded()
+    {
+        MoveCntr.attacks = false;
+    }
+
+
 }

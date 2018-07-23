@@ -9,7 +9,7 @@ public class DieSpace : MonoBehaviour {
     private void OnTriggerExit2D (Collider2D other)
     {
         //if (other.tag == "Player")
-        //SceneManager.LoadScene(0);
+        //    SceneManager.LoadScene(0);
         //Destroy(other.gameObject);
     }
 }

@@ -22,7 +22,7 @@ public  class MovementController : MonoBehaviour {
     private int jumpForce = 2000;
     [SerializeField]
     public bool isFacingRight = true;
-    private bool attacks;
+    public bool attacks;
 
     public bool isGrounded;
 
