@@ -14,7 +14,7 @@ public  class MovementController : MonoBehaviour {
 
     public float playerHeight;
     private float idleHeight;
-    private float playerWidth;
+    public float playerWidth;
 
     private int speed;
     private int crouchSpeed = 5;

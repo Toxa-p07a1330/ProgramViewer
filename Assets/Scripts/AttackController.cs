@@ -23,6 +23,7 @@ public class AttackController : MonoBehaviour {
     bool flag = false;
     float speedRot = 2.5f;
     float degree = 0;
+    int scopeToRight;
 
     public enum WeaponState {
         BLADE,
@@ -35,6 +36,7 @@ public class AttackController : MonoBehaviour {
 	void Start() {
         MoveCntr = GetComponent<MovementController>();
         scope = Instantiate(scoper, MoveCntr.transform.position, Quaternion.identity);
+        scopeMinLen = Mathf.Sqrt(Mathf.Abs(MoveCntr.playerHeight*MoveCntr.playerHeight + MoveCntr.playerWidth*MoveCntr.playerWidth));
         
     }
 	
@@ -60,7 +62,7 @@ public class AttackController : MonoBehaviour {
         
         if (Input.GetKeyDown(KeyCode.G))
         {
-            FlyingArr = Instantiate(Arrow, (MoveCntr.transform.position + scope.transform.position)/2.0f, Quaternion.identity);
+            FlyingArr = Instantiate(Arrow, new Vector2(scoperLen * Mathf.Cos(scoperAng * angleRealtion) * scopeToRight, scoperLen * Mathf.Sin(scoperAng * angleRealtion)), Quaternion.identity);
             FlyingArr.AddForce((scope.transform.position - MoveCntr.rigidbody.transform.position)*fireForce);
             flag = true;
         }
@@ -71,12 +73,12 @@ public class AttackController : MonoBehaviour {
 
     private void handleAimingInput()
     {
-        int scopeToRight;
+        
         if (MoveCntr.isFacingRight)
             scopeToRight = 1;
         else
             scopeToRight = -1;
-        scope.transform.position = MoveCntr.transform.position + new Vector3(scoperLen*Mathf.Cos(scoperAng*angleRealtion)*scopeToRight, scoperLen * Mathf.Sin(scoperAng *angleRealtion), 0);
+        scope.transform.position = MoveCntr.transform.position + new Vector3(scoperLen*Mathf.Cos(scoperAng*angleRealtion)*scopeToRight, scoperLen * Mathf.Sin(scoperAng *angleRealtion), -5);
         if (Input.GetKey(KeyCode.Q) && (scoperAng<90))
             scoperAng += scopeRotSpeed;
         if (Input.GetKey(KeyCode.E) && (scoperAng>-90))
