@@ -1,25 +1,27 @@
 using UnityEngine;
 
-public class PlayerControl : MonoBehaviour {
+public  class MovementController : MonoBehaviour {
 
     public Animator animator;
     public Rigidbody2D rigidbody;
     public BoxCollider2D hitbox; // on triger check if attacked
     public BoxCollider2D groundCollider; // ground collider
     public BoxCollider2D runCollider; // controls wall collisions while running
+    public LayerMask groundMask;
 
     private float jumpDirection;
     private float direction;
 
-    private float playerHeight;
+    public float playerHeight;
     private float idleHeight;
     private float playerWidth;
 
-    private int speed = 20;
-    private int jumpForce = 2500;
-    private float crouchSlowDown = 0.75f;
-
-    private bool isFacingRight = true;
+    private int speed;
+    private int crouchSpeed = 5;
+    private int moveSpeed = 20;
+    private int jumpForce = 2000;
+    [SerializeField]
+    public bool isFacingRight = true;
     private bool attacks;
 
     public bool isGrounded;
@@ -48,11 +50,20 @@ public class PlayerControl : MonoBehaviour {
         changeColliderSize();
         handleInput();
         handleState();
-        isPossStand();
     }
 
     private void handleInput() {
-        handleMoveInput();
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+            baseState = BaseState.MOVE;
+        else
+            baseState = BaseState.IDLE;
+
+        if ((Input.GetKeyDown(KeyCode.Space) || !isGrounded) && additionalState != AdditionalState.CROUCH)
+            additionalState = AdditionalState.JUMP;
+        else if (Input.GetKey(KeyCode.C) && isGrounded)
+            additionalState = AdditionalState.CROUCH;
+        else if (isGrounded && isPossibleStand())
+            additionalState = AdditionalState.NONE;
     }
 
     private void handleState() {
@@ -88,6 +99,12 @@ public class PlayerControl : MonoBehaviour {
 
     private void handleBaseState() {
         direction = Input.GetAxis("Horizontal");
+
+        if (additionalState == AdditionalState.CROUCH)
+            speed = crouchSpeed;
+        else
+            speed = moveSpeed;
+
         if (additionalState == AdditionalState.JUMP && direction * jumpDirection <= 0)
             direction = 0;
         moveVector.x = direction * speed;
@@ -102,17 +119,12 @@ public class PlayerControl : MonoBehaviour {
         transform.localScale = scale;
     }
 
-    public void observeAttackEnded() {
-        attacks = false;
-    }
-
     void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.tag == "Ground" || other.gameObject.tag == "Enemy")
             isGrounded = true;     
     }
 
-    void OnTriggerStay2D(Collider2D other)
-    {
+    void OnTriggerStay2D(Collider2D other) {
         if (other.gameObject.tag == "Ground" || other.gameObject.tag == "Enemy")
             isGrounded = true;
     }
@@ -122,44 +134,26 @@ public class PlayerControl : MonoBehaviour {
         isGrounded = false;
     }
 
-    private void handleMoveInput()
-    {
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
-            baseState = BaseState.MOVE;
-        else
-            baseState = BaseState.IDLE;
-
-        if ((Input.GetKeyDown(KeyCode.Space) || !isGrounded) && additionalState != AdditionalState.CROUCH)
-            additionalState = AdditionalState.JUMP;
-        else if (Input.GetKey(KeyCode.C) && isGrounded)
-            additionalState = AdditionalState.CROUCH;
-        else if (isGrounded && isPossStand())
-            additionalState = AdditionalState.NONE;
-    }
-
     private void changeColliderSize() {
         playerWidth = System.Math.Abs(GetComponent<SpriteRenderer>().bounds.size.x / transform.lossyScale.x);
+
         hitbox.size = new Vector2(playerWidth, playerHeight);
-        groundCollider.size = new Vector2(Mathf.Max(playerWidth, runCollider.size.x) * 0.98f, groundCollider.size.y);
+
+        groundCollider.size = new Vector2(Mathf.Max(playerWidth, runCollider.size.x) * 0.99f, groundCollider.size.y);
         groundCollider.offset = new Vector2(0, -hitbox.size.y / 2);
 
         runCollider.size = new Vector2(runCollider.size.x, playerHeight);
     }
 
-    bool isPossStand()
-    {
-        Debug.DrawRay(rigidbody.position, Vector2.up, Color.red, 0.1f);
-        Debug.DrawRay(rigidbody.position + new Vector2(playerWidth,0) / 2.0f, Vector2.up * (idleHeight / 2 + (idleHeight - playerHeight) / 2), Color.red, 0.1f);
-        Debug.DrawRay(rigidbody.position + new Vector2(-playerWidth, 0) / 2.0f, Vector2.up*(idleHeight/2+ (idleHeight-playerHeight)/2), Color.red, 0.1f);
+    private bool isPossibleStand() {
+        float distance = (idleHeight / 2 + (idleHeight - playerHeight) / 2);
 
+        RaycastHit2D hit_c = Physics2D.Raycast(rigidbody.position, Vector2.up, distance, groundMask);
+        RaycastHit2D hit_r = Physics2D.Raycast(rigidbody.position + new Vector2(-playerWidth, 0) / 2.0f, Vector2.up, distance, groundMask);
+        RaycastHit2D hit_l = Physics2D.Raycast(rigidbody.position + new Vector2(+playerWidth, 0) / 2.0f, Vector2.up, distance, groundMask);
 
-        RaycastHit2D hit_c = Physics2D.Raycast(rigidbody.position, Vector2.up, (idleHeight / 2 + (idleHeight - playerHeight) / 2));
-        RaycastHit2D hit_r = Physics2D.Raycast(rigidbody.position + new Vector2(-playerWidth, 0) / 2.0f, Vector2.up, (idleHeight / 2 + (idleHeight - playerHeight) / 2));
-            RaycastHit2D hit_l = Physics2D.Raycast(rigidbody.position + new Vector2(+playerWidth, 0) / 2.0f, Vector2.up, (idleHeight / 2 + (idleHeight - playerHeight) / 2));
-
-        if ((hit_c.collider == null) && (hit_l.collider == null) && (hit_r.collider == null))
-                return true;
+        if (hit_c.collider != null || hit_r.collider != null || hit_l.collider != null)
             return false;
-        
+        return true;
     }
 }

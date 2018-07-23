@@ -1162,6 +1162,10 @@ C:/Users/User/Desktop/backup/obj/Debug/Assembly-CSharp.pdb
 /Users/evgeniy/UnityProjects/GameV2/Temp/bin/Debug/UnityEngine.ParticlesLegacyModule.xml
 /Users/evgeniy/UnityProjects/GameV2/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
 /Users/evgeniy/UnityProjects/GameV2/Temp/bin/Debug/Unity.IvyParser.dll.mdb
+C:\Users\User\Desktop\workhere\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+C:\Users\User\Desktop\workhere\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\workhere\obj\Debug\Assembly-CSharp.dll
+C:\Users\User\Desktop\workhere\obj\Debug\Assembly-CSharp.pdb
 C:\Users\User\Desktop\workhere\Temp\bin\Debug\Assembly-CSharp.dll
 C:\Users\User\Desktop\workhere\Temp\bin\Debug\Assembly-CSharp.pdb
 C:\Users\User\Desktop\workhere\Temp\bin\Debug\Boo.Lang.dll
@@ -1325,8 +1329,4 @@ C:\Users\User\Desktop\workhere\Temp\bin\Debug\UnityEngine.GoogleAudioSpatializer
 C:\Users\User\Desktop\workhere\Temp\bin\Debug\UnityEngine.HoloLens.xml
 C:\Users\User\Desktop\workhere\Temp\bin\Debug\UnityEngine.SpatialTracking.xml
 C:\Users\User\Desktop\workhere\Temp\bin\Debug\UnityEngine.ParticlesLegacyModule.xml
-C:\Users\User\Desktop\workhere\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
-C:\Users\User\Desktop\workhere\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
 C:\Users\User\Desktop\workhere\obj\Debug\Assembly-CSharp.csproj.CopyComplete
-C:\Users\User\Desktop\workhere\obj\Debug\Assembly-CSharp.dll
-C:\Users\User\Desktop\workhere\obj\Debug\Assembly-CSharp.pdb
