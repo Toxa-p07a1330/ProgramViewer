@@ -62,7 +62,7 @@ public class AttackController : MonoBehaviour {
         
         if (Input.GetKeyDown(KeyCode.G))
         {
-            FlyingArr = Instantiate(Arrow, new Vector2(scoperLen * Mathf.Cos(scoperAng * angleRealtion) * scopeToRight, scoperLen * Mathf.Sin(scoperAng * angleRealtion)), Quaternion.identity);
+            FlyingArr = Instantiate(Arrow, MoveCntr.transform.position + new Vector3(scopeMinLen * Mathf.Cos(scoperAng * angleRealtion) * scopeToRight, scopeMinLen * Mathf.Sin(scoperAng * angleRealtion)), Quaternion.identity);
             FlyingArr.AddForce((scope.transform.position - MoveCntr.rigidbody.transform.position)*fireForce);
             flag = true;
         }
