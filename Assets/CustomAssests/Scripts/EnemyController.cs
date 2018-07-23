@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour {
 
-    public float VisionLen = 10f;
+    public float maxVisionLen = 10f;
     public float maxAngleUp = 30;
     public float maxAngleDown = -30;
     public float rotationSpeed = 1f;
@@ -14,6 +14,8 @@ public class EnemyController : MonoBehaviour {
     private const float angleRealtion = 0.0174533f;
     RaycastHit2D vision;
     public bool see;
+    public float timeOfUndetection = 1;
+    float lastSeenAt;
 
     // Use this for initialization
     void Start () {
@@ -22,20 +24,14 @@ public class EnemyController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        checkViewArea();
+        circulation();
+        debugDraw();
+        detect();
+        find();
 
-        Debug.DrawRay(this.transform.position, new Vector3(VisionLen * Mathf.Cos(angle * angleRealtion) * direction, VisionLen * Mathf.Sin(angle * angleRealtion)));
-        vision = Physics2D.Raycast(this.transform.position, new Vector3(VisionLen * Mathf.Cos(angle * angleRealtion) * direction, VisionLen * Mathf.Sin(angle * angleRealtion)));
-        see = false;
-        if (vision && vision.distance<=VisionLen)
-        {
-            if(vision.collider.tag == "Player")
-                 see = true;
-        }
-        		
 	}
 
-    void checkViewArea()
+    void circulation()
     {
 
         if (true)
@@ -46,7 +42,35 @@ public class EnemyController : MonoBehaviour {
         {
             isMovingUp *= -1;
         }
+    }
 
+    void debugDraw()
+    {
+        float realVisionLen = vision.distance;
+        if (realVisionLen > maxVisionLen || vision.collider==null)
+            realVisionLen = maxVisionLen;
+        Debug.DrawRay(this.transform.position, new Vector3(realVisionLen * Mathf.Cos(angle * angleRealtion) * direction, realVisionLen * Mathf.Sin(angle * angleRealtion)));
+      
+    }
+
+    void detect()
+    {
+
+        vision = Physics2D.Raycast(this.transform.position, new Vector3(maxVisionLen * Mathf.Cos(angle * angleRealtion) * direction, maxVisionLen * Mathf.Sin(angle * angleRealtion)));
+        if (vision && vision.distance <= maxVisionLen)
+        {
+            if (vision.collider.tag == "Player")
+                lastSeenAt = Time.time;
+        }
+
+    }
+
+    void find()
+    {
+        if ((Time.time - lastSeenAt > timeOfUndetection)||(Time.time<5))
+            see = false;
+        else
+            see = true;
 
     }
 }
