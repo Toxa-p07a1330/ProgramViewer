@@ -7,14 +7,14 @@ public class EnemyController : MonoBehaviour {
     public float maxVisionLen = 10f;
     public float maxAngleUp = 30;
     public float maxAngleDown = -30;
-    public float rotationSpeed = 1f;
+    public float rotationSpeed = 3f;
     int isMovingUp = 1;
     public float angle = 0;
-    public int direction = 1; //1 if enemy is looking rigt, -1 if is looking left
+    public int direction = -1; //1 if enemy is looking rigt, -1 if is looking left
     private const float angleRealtion = 0.0174533f;
     RaycastHit2D vision;
     public bool see;
-    public float timeOfUndetection = 1;
+    public float timeOfUndetection = 0.25f;
     float lastSeenAt;
 
     // Use this for initialization
@@ -49,7 +49,13 @@ public class EnemyController : MonoBehaviour {
         float realVisionLen = vision.distance;
         if (realVisionLen > maxVisionLen || vision.collider==null)
             realVisionLen = maxVisionLen;
-        Debug.DrawRay(this.transform.position, new Vector3(realVisionLen * Mathf.Cos(angle * angleRealtion) * direction, realVisionLen * Mathf.Sin(angle * angleRealtion)));
+        Color colorOfRay = Color.white;
+        if (vision.collider !=null && vision.collider.tag == "Ground" && vision.distance <= maxVisionLen)
+            colorOfRay = Color.grey;
+
+        if ((vision.collider != null && vision.collider.tag == "Player" && vision.distance <= maxVisionLen) || (see == true))
+            colorOfRay = Color.red;
+        Debug.DrawRay(this.transform.position, new Vector3(realVisionLen * Mathf.Cos(angle * angleRealtion) * direction, realVisionLen * Mathf.Sin(angle * angleRealtion)), colorOfRay);
       
     }
 
