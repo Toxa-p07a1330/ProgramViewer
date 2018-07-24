@@ -9,6 +9,7 @@ TagManager:
   - Undefined
   - Bullet
   - Enemy
+  - Scope
   layers:
   - Default
   - TransparentFX

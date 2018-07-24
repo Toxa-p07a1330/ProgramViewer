@@ -64,6 +64,7 @@
     <Compile Include="Assets\CustomAssests\Scripts\AttackController.cs" />
     <Compile Include="Assets\CustomAssests\Scripts\BaseController.cs" />
     <Compile Include="Assets\CustomAssests\Scripts\CameraController.cs" />
+    <Compile Include="Assets\CustomAssests\Scripts\EnemyController.cs" />
     <Compile Include="Assets\CustomAssests\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Free Asset - 2D Handcrafted Art\Scripts\CamerController.cs" />
     <None Include="Assets\Free Asset - 2D Handcrafted Art\Shader\NormalMappedTileAnimated.shader" />

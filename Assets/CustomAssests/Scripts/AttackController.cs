@@ -21,7 +21,7 @@ public class AttackController : MonoBehaviour {
     public static Rigidbody2D FlyingArr;
     public static Rigidbody2D KnifeBeat;
     public Rigidbody2D Knife;
-    public static GameObject scope;
+    public GameObject scope;
     bool flag1 = false;
     int scopeToRight = 1;
 
