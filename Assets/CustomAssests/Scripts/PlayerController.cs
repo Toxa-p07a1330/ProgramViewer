@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 
+public static class Global : object
+{
+    public static float hp;
+}
 
 public class PlayerController : MonoBehaviour {
     
@@ -14,6 +18,8 @@ public class PlayerController : MonoBehaviour {
     private Vector3 velocity;
     private bool isJumping;
     public float direction;
+    public float hp;
+    
 
     private BaseController controller;
     private Animator animator;
@@ -32,6 +38,7 @@ public class PlayerController : MonoBehaviour {
     public AdditionalState additionalState;
 
     void Awake() {
+        Global.hp = 1000;
         // init components
         animator = GetComponent<Animator>();
         controller = GetComponent<BaseController>();
@@ -42,6 +49,7 @@ public class PlayerController : MonoBehaviour {
 
     void Update() {
         handleMovement();
+        hp = Global.hp;
     }
 
     private void handleMovement() {

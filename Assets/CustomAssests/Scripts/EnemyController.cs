@@ -16,9 +16,15 @@ public class EnemyController : MonoBehaviour {
     public bool see;
     public float timeOfUndetection = 0.25f;
     float lastSeenAt;
+    PlayerController PlayerCntr;
+    public GameObject player;
+    bool reloaded;
+    float lastFireTime = 0;
+    float reload = 3;
 
     // Use this for initialization
     void Start () {
+        PlayerCntr = player.GetComponent<PlayerController>();
 		
 	}
 	
@@ -28,6 +34,7 @@ public class EnemyController : MonoBehaviour {
         debugDraw();
         detect();
         find();
+        attack();
 
 	}
 
@@ -79,4 +86,15 @@ public class EnemyController : MonoBehaviour {
             see = true;
 
     }
+
+    void attack()
+    {
+        if (see && Time.time - lastFireTime >reload)
+        {
+           Global.hp -= 100;
+            lastFireTime = Time.time;            
+        }
+    }
+    
+    
 }

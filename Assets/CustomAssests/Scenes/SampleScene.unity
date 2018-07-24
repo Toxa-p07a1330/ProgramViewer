@@ -9419,6 +9419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 0
+  hp: 0
   baseState: 0
   additionalState: 0
 --- !u!114 &1344969073
@@ -9800,6 +9801,11 @@ Prefab:
       propertyPath: maxAngleDown
       value: -15
       objectReference: {fileID: 0}
+    - target: {fileID: 114411588225974768, guid: abb4caef3cd7b07459e262985242d97d,
+        type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1344969071}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: abb4caef3cd7b07459e262985242d97d, type: 2}
   m_IsPrefabAsset: 0

@@ -60,6 +60,7 @@ MonoBehaviour:
   direction: -1
   see: 0
   timeOfUndetection: 0.25
+  player: {fileID: 1928671942942308, guid: 534fc8b3629bf425cbe6caf8ed21876d, type: 2}
 --- !u!212 &212298710369031714
 SpriteRenderer:
   m_ObjectHideFlags: 1
