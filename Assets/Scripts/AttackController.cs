@@ -19,9 +19,10 @@ public class AttackController : MonoBehaviour {
     public GameObject scoper;
     public Rigidbody2D Arrow;
     public static Rigidbody2D FlyingArr;
-    public static Rigidbody2D Knife;
+    public static Rigidbody2D KnifeBeat;
+    public Rigidbody2D Knife;
     public static GameObject scope;
-    bool flag = false;
+    bool flag1 = false;
     float speedRot = 2.5f;
     float degree = 0;
     int scopeToRight;
@@ -50,19 +51,10 @@ public class AttackController : MonoBehaviour {
     private void handleInput() {
         if (Input.GetKeyDown(KeyCode.Alpha1))
             weaponState = WeaponState.BLADE;
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha2))
             weaponState = WeaponState.CROSSBOW;
-        else if (Input.GetKeyDown(KeyCode.F))
-        {
-            MoveCntr.attacks = true;
-            Knife = Instantiate(Arrow, MoveCntr.transform.position + new Vector3(armLen * Mathf.Cos(scoperAng * angleRealtion) * scopeToRight, armLen * Mathf.Sin(scoperAng * angleRealtion)), Quaternion.identity);
-            Knife.AddForce((scope.transform.position - MoveCntr.rigidbody.transform.position) * fireForce);
-            degree += 25 * speedRot;
-            Knife.MoveRotation(degree);
-            Destroy(Knife.gameObject, 0.1f);
 
-        }
-
+        handleKnifeInput();
         handleThrowInput();
         handleAimingInput();
     }
@@ -73,9 +65,9 @@ public class AttackController : MonoBehaviour {
         {
             FlyingArr = Instantiate(Arrow, MoveCntr.transform.position + new Vector3(scopeMinLen * Mathf.Cos(scoperAng * angleRealtion) * scopeToRight, scopeMinLen * Mathf.Sin(scoperAng * angleRealtion)), Quaternion.identity);
             FlyingArr.AddForce((scope.transform.position - MoveCntr.rigidbody.transform.position)*fireForce);
-            flag = true;
+            flag1 = true;
         }
-        if(flag)
+        if(flag1)
         FlyingArr.MoveRotation(degree);
         degree+=speedRot;
     }
@@ -105,6 +97,17 @@ public class AttackController : MonoBehaviour {
     {
         MoveCntr.attacks = false;
     }
-
+    public void handleKnifeInput()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            MoveCntr.attacks = true;
+            KnifeBeat = Instantiate(Knife, MoveCntr.transform.position + new Vector3(armLen * Mathf.Cos(scoperAng * angleRealtion) * scopeToRight, armLen * Mathf.Sin(scoperAng * angleRealtion)), Quaternion.identity);
+            Destroy(KnifeBeat.gameObject, 0.3f);
+            KnifeBeat.transform.localScale = new Vector2(KnifeBeat.transform.lossyScale.x * scopeToRight, KnifeBeat.transform.lossyScale.y);
+        }
+            
+    }
+       
 
 }
