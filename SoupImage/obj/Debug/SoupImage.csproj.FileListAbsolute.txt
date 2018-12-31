@@ -1,0 +1,10 @@
+C:\Users\User\source\repos\SoupImage\SoupImage\obj\Debug\SoupImage.csprojAssemblyReference.cache
+C:\Users\User\source\repos\SoupImage\SoupImage\obj\Debug\SoupImage.Form1.resources
+C:\Users\User\source\repos\SoupImage\SoupImage\obj\Debug\SoupImage.Properties.Resources.resources
+C:\Users\User\source\repos\SoupImage\SoupImage\obj\Debug\SoupImage.csproj.GenerateResource.cache
+C:\Users\User\source\repos\SoupImage\SoupImage\obj\Debug\SoupImage.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\SoupImage\SoupImage\bin\Debug\SoupImage.exe.config
+C:\Users\User\source\repos\SoupImage\SoupImage\bin\Debug\SoupImage.exe
+C:\Users\User\source\repos\SoupImage\SoupImage\bin\Debug\SoupImage.pdb
+C:\Users\User\source\repos\SoupImage\SoupImage\obj\Debug\SoupImage.exe
+C:\Users\User\source\repos\SoupImage\SoupImage\obj\Debug\SoupImage.pdb
