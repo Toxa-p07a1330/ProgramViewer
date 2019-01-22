@@ -1,0 +1,12 @@
+C:\Users\User\source\repos\regOrAuth\regOrAuth\bin\Debug\regOrAuth.exe.config
+C:\Users\User\source\repos\regOrAuth\regOrAuth\bin\Debug\regOrAuth.exe
+C:\Users\User\source\repos\regOrAuth\regOrAuth\bin\Debug\regOrAuth.pdb
+C:\Users\User\source\repos\regOrAuth\regOrAuth\obj\Debug\regOrAuth.Form1.resources
+C:\Users\User\source\repos\regOrAuth\regOrAuth\obj\Debug\regOrAuth.Properties.Resources.resources
+C:\Users\User\source\repos\regOrAuth\regOrAuth\obj\Debug\regOrAuth.csproj.GenerateResource.cache
+C:\Users\User\source\repos\regOrAuth\regOrAuth\obj\Debug\regOrAuth.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\regOrAuth\regOrAuth\obj\Debug\regOrAuth.exe
+C:\Users\User\source\repos\regOrAuth\regOrAuth\obj\Debug\regOrAuth.pdb
+C:\Users\User\source\repos\regOrAuth\regOrAuth\obj\Debug\regOrAuth.Registration.resources
+C:\Users\User\source\repos\regOrAuth\regOrAuth\obj\Debug\regOrAuth.content.resources
+C:\Users\User\source\repos\regOrAuth\regOrAuth\obj\Debug\regOrAuth.csprojAssemblyReference.cache

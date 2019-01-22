@@ -1,0 +1,13 @@
+<user: login = login; password = qwerty; info = "">
+ДСбойчь!лмяш
+
+
+</user>
+<user: login = login2; password = qwerty2; info = "">
+Here exists users notes/ It will be shifrated later
+Information of the second user
+</user>
+<user: login = login3; password = qwerty3; info = "">
+Here exists users notes/ It will be shifrated later
+Information of the third user
+</user>
